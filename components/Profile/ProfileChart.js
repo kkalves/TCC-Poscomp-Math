@@ -1,9 +1,7 @@
 import React from "react";
-import { FlatList, ScrollView, Text, View } from "react-native";
+import { ScrollView, Text } from "react-native";
 import { VictoryPie } from "victory-native";
 import * as Animatable from "react-native-animatable";
-
-import { subject } from "../../database/json/Subjects";
 
 export default ({ quizDatas }) => {
   const colors = [

@@ -3,9 +3,9 @@ import { View, StyleSheet, Image } from "react-native";
 import { DrawerContentScrollView, DrawerItem } from "@react-navigation/drawer";
 import { Avatar, Title, Caption, Drawer } from "react-native-paper";
 import Icon from "react-native-vector-icons/MaterialCommunityIcons";
+
 import Firebase from "../database/firebase";
 import * as firebase from "firebase";
-
 import exampleImage from "../assets/defaultImage.jpg";
 
 const exampleImageUri = Image.resolveAssetSource(exampleImage).uri;

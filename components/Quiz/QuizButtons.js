@@ -1,6 +1,7 @@
 import React from "react";
 import { View, Dimensions, StyleSheet } from "react-native";
-import { AntDesign } from "@expo/vector-icons";
+import Icon from "react-native-vector-icons/AntDesign";
+// import { AntDesign } from "@expo/vector-icons";
 
 export default ({}) => {
   if (!visible) return null;
@@ -15,7 +16,7 @@ export default ({}) => {
   return (
     <View style={styles.container}>
       <View style={circleStyles}>
-        <AntDesign name={icon} size={60} color="#FFF" />
+        <Icon name={icon} size={60} color="#FFF" />
       </View>
     </View>
   );
