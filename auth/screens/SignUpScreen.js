@@ -69,7 +69,7 @@ export default class SignUpScreen extends Component {
 
   getPhotoPermission = async () => {
     if (Constants.platform.android) {
-      const { status } = await Permission.askAsync(Permission.CAMERA_ROLL);
+      const { status } = await Permission.askAsync(Permission.MEDIA_LIBRARY);
 
       if (status != "granted") {
         alert("Nós precisamos de permissão para acessar o seu rolo de camera.");

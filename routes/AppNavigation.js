@@ -1,6 +1,7 @@
 import React from "react";
 import { createDrawerNavigator } from "@react-navigation/drawer";
 import DrawerContent from "../components/DrawerContent";
+import Icons from "react-native-vector-icons/MaterialCommunityIcons";
 
 import AppTabNavigation from "../app/navigation/tab/AppTabNavigation";
 import SettingsStackNavigation from "../app/navigation/stack/SettingsStackNavigation";
@@ -18,6 +19,7 @@ const AppNavigation = () => (
       name="AppTab"
       component={AppTabNavigation}
       options={{
+        headerShown: true,
         headerStyle: {
           elevation: 0,
           shadowOpacity: 0,
@@ -25,6 +27,7 @@ const AppNavigation = () => (
         },
         headerTintColor: "#fff",
         headerTitle: "",
+        // drawerIcon: "menu",
       }}
     />
     <AppDrawer.Screen

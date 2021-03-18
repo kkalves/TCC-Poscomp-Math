@@ -1,21 +1,71 @@
-import { StatusBar } from 'expo-status-bar';
-import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import React from "react";
+import { Image } from "react-native";
+import { Asset } from "expo-asset";
+import AppLoading from "expo-app-loading";
+import * as Font from "expo-font";
 
-export default function App() {
-  return (
-    <View style={styles.container}>
-      <Text>Open up App.js to start working on your app!</Text>
-      <StatusBar style="auto" />
-    </View>
-  );
+import InitialNavigation from "./routes/InitialNavigation.js";
+
+function cacheImages(images) {
+  return images.map((image) => {
+    if (typeof image === "string") {
+      return Image.prefetch(image);
+    } else {
+      return Asset.fromModule(image).downloadAsync();
+    }
+  });
 }
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-});
+export default class App extends React.Component {
+  constructor() {
+    super();
+    this.state = {
+      isReady: false,
+      isAssetsLoaded: false,
+      isFontLoaded: false,
+    };
+  }
+
+  async _loadAssetsAsync() {
+    const imageAssets = cacheImages([
+      require("./assets/Background.png"),
+      require("./assets/logo.png"),
+      require("./assets/HomeModel.png"),
+      require("./assets/BG_Quiz/BGQuizModel.png"),
+      require("./assets/BG_Quiz/BGQuizText.png"),
+      require("./assets/BG_Quiz/BGQuizTitle.png"),
+      require("./assets/BG_Quiz/BGFinishQuizMediumModel.png"),
+      require("./assets/QuizImage.png"),
+      require("./assets/Raiox.png"),
+    ]);
+
+    await Font.loadAsync({
+      Regular: require("./assets/fonts/Montserrat-Regular.otf"),
+      Medium: require("./assets/fonts/Montserrat-Medium.otf"),
+      Semibold: require("./assets/fonts/Montserrat-SemiBold.otf"),
+      Bold: require("./assets/fonts/Montserrat-Bold.otf"),
+      ExtraBold: require("./assets/fonts/Montserrat-ExtraBold.otf"),
+    });
+
+    await Promise.all([...imageAssets]);
+  }
+
+  handleFinishLoading = () => {
+    this.setState({
+      isReady: true,
+    });
+  };
+
+  render() {
+    if (!this.state.isReady) {
+      return (
+        <AppLoading
+          startAsync={this._loadAssetsAsync}
+          onFinish={this.handleFinishLoading}
+          onError={console.warn}
+        />
+      );
+    }
+    return <InitialNavigation />;
+  }
+}
